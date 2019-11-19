@@ -91,6 +91,7 @@ ospray_create_library(ospray_sg SHARED
   camera/PerspectiveCamera.cpp
   camera/PanoramicCamera.cpp
   camera/OrthographicCamera.cpp
+  camera/DomeCamera.cpp
 
   common/Common.cpp
   common/Data.cpp
