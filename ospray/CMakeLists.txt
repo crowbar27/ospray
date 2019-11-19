@@ -81,6 +81,8 @@ set(OSPRAY_ISPC_DEVICE_SOURCES
   camera/OrthographicCamera.cpp
   camera/PanoramicCamera.ispc
   camera/PanoramicCamera.cpp
+  camera/DomeCamera.ispc
+  camera/DomeCamera.cpp
 
   geometry/Geometry.ispc
   geometry/Geometry.cpp
