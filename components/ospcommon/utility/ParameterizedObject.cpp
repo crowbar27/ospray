@@ -60,7 +60,7 @@ namespace ospcommon {
     std::shared_ptr<ParameterizedObject::Param> *
     ParameterizedObject::params_begin()
     {
-      return &paramList[0];
+      return paramList.data();
     }
 
     std::shared_ptr<ParameterizedObject::Param> *
