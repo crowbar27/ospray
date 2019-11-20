@@ -21,16 +21,36 @@
 
 namespace ospray {
 
-    DomeCamera::DomeCamera(void)
-    {
-        this->ispcEquivalent = ispc::DomeCamera_create(this);
+  DomeCamera::DomeCamera(void)
+  {
+    this->ispcEquivalent = ispc::DomeCamera_create(this);
+  }
+
+  void DomeCamera::commit(void)
+  {
+    Camera::commit();
+
+    auto apertureRadius = this->getParamf("apertureRadius", 0.0f);
+    auto aspectRatio = this->getParamf("aspect", 1.0f);
+    auto focusDistance = this->getParamf("focusDistance", 1.0f);
+    //auto fovy = this->getParamf("fovy", 60.f);
+    auto fovy = 180.0f; // FOV is always the whole hemisphere.
+
+    auto scaledAperture = 0.0f;
+    if (apertureRadius > 0.f) {
+      auto height = 2.f * std::tan(deg2rad(0.5f * fovy));
+      auto width = height * aspectRatio;
+      scaledAperture = apertureRadius / (width * focusDistance);
     }
 
-    std::string DomeCamera::toString(void) const
-    {
-        return "ospray::DomeCamera";
-    }
+    ispc::DomeCamera_set(this->getIE(), aspectRatio, scaledAperture);
+  }
 
-    OSP_REGISTER_CAMERA(DomeCamera, dome);
+  std::string DomeCamera::toString(void) const
+  {
+    return "ospray::DomeCamera";
+  }
 
-}  // namespace ospray
+  OSP_REGISTER_CAMERA(DomeCamera, dome);
+
+} // namespace ospray

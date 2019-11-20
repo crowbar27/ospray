@@ -22,36 +22,31 @@
 
 namespace ospray {
 
-    /*! \defgroup dome_camera The Dome Master Camera ("dome")
+  /*! \defgroup dome_camera The Dome Master Camera ("dome")
 
-        \brief todo
+      \brief todo
 
-        \ingroup ospray_supported_cameras
+      \ingroup ospray_supported_cameras
 
-        A camera that produces a Dome Master image on a quadratic frame buffer.
-        This camera type is loaded by passing the type string "dome" to
-        \ref ospNewCamera
+      A camera that produces a Dome Master image on a quadratic frame buffer.
+      This camera type is loaded by passing the type string "dome" to
+      \ref ospNewCamera.
 
-        The dome camera supports the following parameters
-        <pre>
-        vec3f(a) pos;    // camera position
-        vec3f(a) dir;    // camera direction
-        vec3f(a) up;     // up vector
-        </pre>
-
-        The functionality for a dome camera is implemented via the
-        \ref ospray::DomeCamera class.
+      The functionality for a dome camera is implemented via the
+      \ref ospray::DomeCamera class.
     */
 
-    //! Implements a dome master camera (see \subpage dome_camera)
-    struct OSPRAY_SDK_INTERFACE DomeCamera : public Camera
-    {
-        /*! \brief constructor \internal also creates the ispc-side data structure */
-        DomeCamera(void);
+  /// Implements a DomeMaster camera.
+  struct OSPRAY_SDK_INTERFACE DomeCamera : public Camera
+  {
+    DomeCamera(void);
 
-        virtual ~DomeCamera(void) override = default;
+    virtual ~DomeCamera(void) override = default;
 
-        virtual std::string toString(void) const override;
-    };
+    virtual void commit(void) override;
+
+    virtual std::string toString(void) const override;
+
+  };
 
 } // ::ospray
