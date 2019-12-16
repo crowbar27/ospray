@@ -104,6 +104,8 @@ set(OSPRAY_ISPC_DEVICE_SOURCES
   geometry/Slices.cpp
   geometry/Isosurfaces.ispc
   geometry/Isosurfaces.cpp
+  geometry/Arrows.ispc
+  geometry/Arrows.cpp
 
   lights/Light.ispc
   lights/Light.cpp
